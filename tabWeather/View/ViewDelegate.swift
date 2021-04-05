@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+protocol ViewDelegate {
+    
+    func displayLocationDenied()
+    
+    func displayWeather(weatherData: WeatherData)
+    
+}

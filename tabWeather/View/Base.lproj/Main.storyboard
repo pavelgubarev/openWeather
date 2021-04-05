@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,7 +15,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="DIM-h5-lNU"/>
-                        <color key="backgroundColor" systemColor="systemGreenColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Forecast" image="calendar" catalog="system" id="qe1-8r-VVQ"/>
                 </viewController>
@@ -27,18 +26,54 @@
         <!--Weather-->
         <scene sceneID="01S-l0-j8x">
             <objects>
-                <viewController id="EfZ-2N-E9X" sceneMemberID="viewController">
+                <viewController id="EfZ-2N-E9X" customClass="WeatherViewController" customModule="tabWeather" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ICz-uR-k5v">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NXO-5Q-yVp">
+                                <rect key="frame" x="62" y="174" width="80" height="41"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Температура:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VAb-ai-sZe">
+                                <rect key="frame" x="62" y="263" width="206" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DNA-sD-xhg">
+                                <rect key="frame" x="62" y="300" width="57" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="D5F-hZ-u7X"/>
-                        <color key="backgroundColor" systemColor="systemRedColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="NXO-5Q-yVp" firstAttribute="leading" secondItem="D5F-hZ-u7X" secondAttribute="leading" constant="62" id="0Fh-GV-4Hv"/>
+                            <constraint firstItem="DNA-sD-xhg" firstAttribute="top" secondItem="VAb-ai-sZe" secondAttribute="bottom" constant="8" symbolic="YES" id="0Ri-wS-RzV"/>
+                            <constraint firstItem="VAb-ai-sZe" firstAttribute="top" secondItem="NXO-5Q-yVp" secondAttribute="bottom" constant="48" id="3KQ-RD-esO"/>
+                            <constraint firstItem="VAb-ai-sZe" firstAttribute="leading" secondItem="D5F-hZ-u7X" secondAttribute="leading" constant="62" id="5hG-L4-P7Y"/>
+                            <constraint firstItem="D5F-hZ-u7X" firstAttribute="trailing" secondItem="DNA-sD-xhg" secondAttribute="trailing" constant="295" id="AJS-ev-NS1"/>
+                            <constraint firstItem="DNA-sD-xhg" firstAttribute="leading" secondItem="D5F-hZ-u7X" secondAttribute="leading" constant="62" id="PfI-9T-PFf"/>
+                            <constraint firstItem="D5F-hZ-u7X" firstAttribute="bottom" secondItem="DNA-sD-xhg" secondAttribute="bottom" constant="484" id="Ps5-Jx-l4H"/>
+                            <constraint firstItem="NXO-5Q-yVp" firstAttribute="top" secondItem="D5F-hZ-u7X" secondAttribute="top" constant="130" id="XyA-Rp-aXL"/>
+                            <constraint firstItem="D5F-hZ-u7X" firstAttribute="trailing" secondItem="VAb-ai-sZe" secondAttribute="trailing" constant="207" id="dAs-Uy-nwe"/>
+                            <constraint firstItem="D5F-hZ-u7X" firstAttribute="trailing" secondItem="NXO-5Q-yVp" secondAttribute="trailing" constant="272" id="tST-di-vXn"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Weather" id="aRM-cM-TJs"/>
+                    <connections>
+                        <outlet property="cityName" destination="NXO-5Q-yVp" id="ABl-V7-QM2"/>
+                        <outlet property="temp" destination="DNA-sD-xhg" id="Efd-y4-eWy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lmV-Pu-krJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-521" y="-892"/>
+            <point key="canvasLocation" x="-521.73913043478262" y="-892.63392857142856"/>
         </scene>
         <!--Custom Tab Bar Controller-->
         <scene sceneID="TuL-wb-Pj7">
@@ -61,11 +96,5 @@
     </scenes>
     <resources>
         <image name="calendar" catalog="system" width="128" height="106"/>
-        <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
     </resources>
 </document>
