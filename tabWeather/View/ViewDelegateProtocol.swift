@@ -12,7 +12,9 @@ protocol ViewDelegate {
     func displayLocationDenied()
     
     func displayWeather(weatherData: WeatherData)
-    
+
+    func displayForecast(forecastData: FullForecast)
+
     func setCities(withCities: [City])
     
     func setCurrentCity(cityID: Int)

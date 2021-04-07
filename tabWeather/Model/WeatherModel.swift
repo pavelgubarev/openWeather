@@ -8,7 +8,16 @@
 import Foundation
 import CoreLocation
 
-typealias CompletionHandler = (WeatherData) -> (Void) 
+struct forecastOneDay {
+    var date : Date
+    var temp : Double
+}
+
+typealias FullForecast = [forecastOneDay]
+
+typealias CompletionHandlerWeatherData = (WeatherData) -> (Void)
+typealias CompletionHandlerForecast = (FullForecast) -> (Void)
+
 
 class WeatherModel : NSObject, CLLocationManagerDelegate {
     
@@ -17,7 +26,7 @@ class WeatherModel : NSObject, CLLocationManagerDelegate {
     private var locationManager: CLLocationManager?
     
     private var currentLocation: CLLocationCoordinate2D?
-    
+
     var currentCity : Int = 0
     
     var cities = [City]()

@@ -56,9 +56,9 @@ class WeatherPresenter {
     }
     
     func forecastDidAppear() {
-        weatherModel.getForecastFor(cityID : weatherModel.currentCity, completionHandler: { (weatherData) -> (Void)  in
+        weatherModel.getForecastFor(cityID : weatherModel.currentCity, completionHandler: { (forecastData) -> (Void)  in
                                           
-            self.weatherViewDelegate!.displayWeather(weatherData: weatherData)
+            self.weatherViewDelegate!.displayForecast(forecastData: forecastData)
         })
     }
 }

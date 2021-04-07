@@ -10,7 +10,7 @@ import Foundation
 
 extension WeatherModel {
     
-    func getCurrentWeatherFor(cityID : Int, completionHandler: @escaping CompletionHandler) {
+    func getCurrentWeatherFor(cityID : Int, completionHandler: @escaping CompletionHandlerWeatherData) {
         
         let url = URL(string: self.dataURLBaseSting + "current?" +
             "&lat=" + cities[cityID].geo_lat +
@@ -30,8 +30,7 @@ extension WeatherModel {
             guard let data = data, let json = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as? [String: Any]  else {
                 return
             }
-            
-                        
+                                    
             guard let jsonData = json["data"] as? [[String: AnyObject]] else { return }
             
             let jsonDataFirst = jsonData[0]
@@ -51,9 +50,9 @@ extension WeatherModel {
         
     }
     
-    func getForecastFor(cityID : Int, completionHandler: @escaping CompletionHandler) {
+    func getForecastFor(cityID : Int, completionHandler: @escaping CompletionHandlerForecast) {
         
-        let url = URL(string: self.dataURLBaseSting + "forecast/daily" +
+        let url = URL(string: self.dataURLBaseSting + "forecast/daily?" +
             "&lat=" + cities[cityID].geo_lat +
             "&lon=" + cities[cityID].geo_long
             + key )!
@@ -70,8 +69,23 @@ extension WeatherModel {
                 return
             }
         
-           print(json)
+            guard let jsonData = json["data"] as? [[String: AnyObject]] else { return }
+
+            var forecast = FullForecast()
+
+            for oneDateForecast in jsonData {
+                let dateString = oneDateForecast["valid_date"]  as! String
+                let date = dateString.toDate(dateFormat: "yyyy-MM-dd")
+                let temp = oneDateForecast["temp"] as! Double
+                
+                if date != nil {
+                    forecast.append(forecastOneDay(date: date!, temp: temp ))
+                }
+            }
             
+            DispatchQueue.main.async() {
+                completionHandler(forecast)
+            }
             
         }
         task.resume()
@@ -79,4 +93,15 @@ extension WeatherModel {
     }
     
     
+}
+
+extension String {
+  func toDate(dateFormat: String) -> Date? {
+
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = dateFormat
+
+    let date: Date? = dateFormatter.date(from: self)
+    return date
+}
 }

@@ -41,10 +41,14 @@ class CustomTabBarController : UITabBarController, ViewDelegate {
     override func viewDidAppear(_ animated: Bool) {
         weatherPresenter.onMainViewAppear()
     }
-    
-    
+        
     func displayWeather(weatherData: WeatherData) {
         weatherVC?.displayWeather(weatherData: weatherData)
+    }
+    
+    func displayForecast(forecastData: FullForecast) {
+        forecastVC?.forecast = forecastData
+        forecastVC?.tableView.reloadData()
     }
     
     func displayLocationDenied() {
