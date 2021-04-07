@@ -19,3 +19,10 @@ struct WeatherData {
     var temp: String
     var sky: SkyCondition
 }
+
+struct City: Encodable, Decodable {
+    var id : Int
+    var name: String
+    var geo_lat: String
+    var geo_long: String
+}

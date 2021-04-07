@@ -18,13 +18,24 @@ class WeatherModel : NSObject, CLLocationManagerDelegate {
     
     private var currentLocation: CLLocationCoordinate2D?
     
-    let dataURLBaseSting = "https://api.openweathermap.org/data/2.5/"
-    let key = "&appid=b18a5570e4f54a9befc80eb42ad0feef"    
+    var currentCity : Int = 0
+    
+    var cities = [City]()
+    
+    let dataURLBaseSting = "https://api.weatherbit.io/v2.0/"
+    let key = "&key=ff7cd68bcfa94069a7027691119b8e29"
         
     override init() {
         super.init()
         locationManager = CLLocationManager()
         locationManager?.delegate = self
+        
+        self.loadCities()
+    }
+    
+    func setLocalLocation(lat: String, long: String) {
+        let updatedLocalCity = City(id: 0, name: cities[0].name, geo_lat: lat, geo_long: long)
+        cities[0] = updatedLocalCity
     }
     
     func setPresenter(withPresenter : WeatherPresenter) {

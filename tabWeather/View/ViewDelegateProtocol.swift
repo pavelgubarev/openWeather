@@ -13,4 +13,8 @@ protocol ViewDelegate {
     
     func displayWeather(weatherData: WeatherData)
     
+    func setCities(withCities: [City])
+    
+    func setCurrentCity(cityID: Int)
+    
 }

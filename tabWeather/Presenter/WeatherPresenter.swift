@@ -25,7 +25,6 @@ class WeatherPresenter {
     }
     
     func onMainViewAppear() {
-        
         weatherModel.requestLocation()
     }
     
@@ -37,12 +36,29 @@ class WeatherPresenter {
         
     }
     
+    func mainViewLoaded() {
+        weatherViewDelegate!.setCities(withCities: weatherModel.cities)
+
+        weatherViewDelegate!.setCurrentCity(cityID: 0)
+    }
+    
     func gotLocalLocation(location : CLLocationCoordinate2D) {
                 
-        let coords = Coords(lat: String(Int(location.latitude)), long: String(Int(location.longitude)))
-        weatherModel.getCurrentWeatherFor(location: coords, completionHandler: { (weatherData) -> (Void)  in
+        weatherModel.setLocalLocation(lat: String(location.latitude), long: String(location.longitude))
+        weatherModel.getCurrentWeatherFor(cityID : weatherModel.currentCity, completionHandler: { (weatherData) -> (Void)  in
                                           
             self.weatherViewDelegate!.displayWeather(weatherData: weatherData)
-    })
+        })
+    }
+    
+    func didCitySelect(cityID : Int) {
+        weatherModel.currentCity = cityID
+    }
+    
+    func forecastDidAppear() {
+        weatherModel.getForecastFor(cityID : weatherModel.currentCity, completionHandler: { (weatherData) -> (Void)  in
+                                          
+            self.weatherViewDelegate!.displayWeather(weatherData: weatherData)
+        })
     }
 }
