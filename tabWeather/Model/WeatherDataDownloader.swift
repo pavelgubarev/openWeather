@@ -50,7 +50,7 @@ extension WeatherModel {
             }
             let sky = SkyCondition.clear
 
-            let weatherData = WeatherData(cityName: cityName, temp:String(tempDouble), sky: sky)
+            let weatherData = WeatherData(cityName: cityName, temp:tempDouble, sky: sky)
 
             DispatchQueue.main.async() {
                 completionHandler(Result.success(weatherData))
