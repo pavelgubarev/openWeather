@@ -18,20 +18,20 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ForecastOneCell" id="nMO-UF-AvT" customClass="ForecastOneCell" customModule="tabWeather" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44.5"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nMO-UF-AvT" id="Sig-E3-t9W">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ARg-bJ-lyn">
-                                            <rect key="frame" x="39" y="11" width="475" height="21.5"/>
+                                            <rect key="frame" x="39" y="11" width="336" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r8e-kK-VJc">
-                                            <rect key="frame" x="188" y="11" width="41.5" height="23"/>
+                                            <rect key="frame" x="188" y="11" width="41.5" height="22.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -44,7 +44,7 @@
                                         <constraint firstItem="r8e-kK-VJc" firstAttribute="leading" secondItem="Sig-E3-t9W" secondAttribute="trailing" constant="-187" id="Svo-Wg-BRe"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="ARg-bJ-lyn" secondAttribute="bottom" constant="1" id="SzD-ln-XiF"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="r8e-kK-VJc" secondAttribute="trailing" constant="50" id="U46-7S-Ycj"/>
-                                        <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="ARg-bJ-lyn" secondAttribute="trailing" constant="-139" id="mQh-u7-6RW"/>
+                                        <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="ARg-bJ-lyn" secondAttribute="trailing" id="mQh-u7-6RW"/>
                                         <constraint firstItem="ARg-bJ-lyn" firstAttribute="top" secondItem="Sig-E3-t9W" secondAttribute="topMargin" id="xgC-a7-ZQ5"/>
                                     </constraints>
                                 </tableViewCellContentView>
