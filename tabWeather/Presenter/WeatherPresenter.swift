@@ -33,7 +33,7 @@ class WeatherPresenter {
     }
     
     func displayLocationDenied() {
-        
+        self.weatherViewDelegate?.displayLocationDenied()
     }
     
     func mainViewLoaded() {
@@ -42,23 +42,35 @@ class WeatherPresenter {
         weatherViewDelegate!.setCurrentCity(cityID: 0)
     }
     
-    func gotLocalLocation(location : CLLocationCoordinate2D) {
-                
-        weatherModel.setLocalLocation(lat: String(location.latitude), long: String(location.longitude))
-        weatherModel.getCurrentWeatherFor(cityID : weatherModel.currentCity, completionHandler: { (weatherData) -> (Void)  in
-                                          
+    func updateCurrentWeather() {
+        weatherModel.getCurrentWeatherFor(cityID : weatherModel.currentCity, completionHandler: { (weatherData) -> (Void)  in            
             self.weatherViewDelegate!.displayWeather(weatherData: weatherData)
         })
     }
     
+    func gotLocalLocation(location : CLLocationCoordinate2D) {
+        
+        weatherModel.setLocalLocation(lat: String(location.latitude), long: String(location.longitude))
+        updateCurrentWeather()
+    }
+    
+    func setNewLocalLocationAndUpdate() {
+        weatherModel.setLocalLocation(lat: weatherModel.cities[weatherModel.currentCity].geo_lat, long: weatherModel.cities[weatherModel.currentCity].geo_long)
+        updateCurrentWeather()
+    }
+    
     func didCitySelect(cityID : Int) {
         weatherModel.currentCity = cityID
+        setNewLocalLocationAndUpdate()
+    }
+    
+    func updateForecast() {
+        weatherModel.getForecastFor(cityID : weatherModel.currentCity, completionHandler: { (forecastData) -> (Void)  in
+            self.weatherViewDelegate!.displayForecast(forecastData: forecastData)
+        })
     }
     
     func forecastDidAppear() {
-        weatherModel.getForecastFor(cityID : weatherModel.currentCity, completionHandler: { (forecastData) -> (Void)  in
-                                          
-            self.weatherViewDelegate!.displayForecast(forecastData: forecastData)
-        })
+        updateForecast()
     }
 }

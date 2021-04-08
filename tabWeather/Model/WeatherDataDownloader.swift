@@ -17,8 +17,6 @@ extension WeatherModel {
             "&lon=" + cities[cityID].geo_long +
                         key )!
         
-        print(url)
-        
         let request = URLRequest(url: url)
                 
         let task = URLSession.shared.dataTask(with: request) {data, response, error in
@@ -32,9 +30,7 @@ extension WeatherModel {
             }
                                     
             guard let jsonData = json["data"] as? [[String: AnyObject]] else { return }
-            
             let jsonDataFirst = jsonData[0]
-            
             guard let cityName = jsonDataFirst["city_name"] as? String else { return }
             guard let tempDouble = jsonDataFirst["temp"] as? Double else { return }
             let sky = SkyCondition.clear
@@ -96,12 +92,12 @@ extension WeatherModel {
 }
 
 extension String {
-  func toDate(dateFormat: String) -> Date? {
-
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = dateFormat
-
-    let date: Date? = dateFormatter.date(from: self)
-    return date
-}
+    func toDate(dateFormat: String) -> Date? {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = dateFormat
+        
+        let date: Date? = dateFormatter.date(from: self)
+        return date
+    }
 }

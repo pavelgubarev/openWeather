@@ -55,8 +55,7 @@ class WeatherModel : NSObject, CLLocationManagerDelegate {
         locationManager?.requestAlwaysAuthorization()
     }
     
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {        
         if status == .authorizedAlways || status == .authorizedWhenInUse {
             self.presenter?.startGettingLocalWeather()
         } else {
@@ -67,10 +66,8 @@ class WeatherModel : NSObject, CLLocationManagerDelegate {
     func getCurrentLocation() {
         locationManager?.startUpdatingLocation()
     }
-
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
         if currentLocation == nil {
             let locValue : CLLocationCoordinate2D = manager.location!.coordinate
             currentLocation = locValue
