@@ -82,7 +82,7 @@ class WeatherPresenter {
                     self.weatherViewDelegate!.displayForecast(forecastData: forecastData)
                     self.weatherModel.saveForecast(forecastData: forecastData)
                 case .failure(let error):
-                    //print(error)
+                    print(error)
                     DispatchQueue.main.async() {
                         self.weatherViewDelegate?.displayConnectionError()
                     }
