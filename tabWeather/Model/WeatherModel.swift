@@ -15,9 +15,6 @@ struct forecastOneDay {
 
 typealias FullForecast = [forecastOneDay]
 
-typealias CompletionHandlerWeatherData = (WeatherData) -> (Void)
-typealias CompletionHandlerForecast = (FullForecast) -> (Void)
-
 
 class WeatherModel : NSObject, CLLocationManagerDelegate {
     
@@ -54,14 +51,22 @@ class WeatherModel : NSObject, CLLocationManagerDelegate {
     func requestLocation() {
         locationManager?.requestAlwaysAuthorization()
     }
+
     
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {        
-        if status == .authorizedAlways || status == .authorizedWhenInUse {
-            self.presenter?.startGettingLocalWeather()
-        } else {
-            self.presenter?.displayLocationDenied()
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+            switch status {
+            case .notDetermined:
+                break
+            case .authorizedWhenInUse, .authorizedAlways:
+                self.presenter?.startGettingLocalWeather()
+                break
+            case .restricted, .denied:
+                self.presenter?.displayLocationDenied()
+                break
+            @unknown default:
+                break
+            }
         }
-    }
     
     func getCurrentLocation() {
         locationManager?.startUpdatingLocation()

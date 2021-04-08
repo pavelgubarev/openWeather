@@ -43,8 +43,13 @@ class WeatherPresenter {
     }
     
     func updateCurrentWeather() {
-        weatherModel.getCurrentWeatherFor(cityID : weatherModel.currentCity, completionHandler: { (weatherData) -> (Void)  in            
+        weatherModel.getCurrentWeatherFor(cityID : weatherModel.currentCity, completionHandler: { (result) -> (Void)  in            switch result {
+        case .success(let weatherData):
             self.weatherViewDelegate!.displayWeather(weatherData: weatherData)
+        case .failure(let error):
+            print(error)
+        }
+        
         })
     }
     
@@ -65,9 +70,9 @@ class WeatherPresenter {
     }
     
     func updateForecast() {
-        weatherModel.getForecastFor(cityID : weatherModel.currentCity, completionHandler: { (forecastData) -> (Void)  in
-            self.weatherViewDelegate!.displayForecast(forecastData: forecastData)
-        })
+//        weatherModel.getForecastFor(cityID : weatherModel.currentCity, completionHandler: { (forecastData) -> (Void)  in
+//            self.weatherViewDelegate!.displayForecast(forecastData: forecastData)
+//        })
     }
     
     func forecastDidAppear() {
