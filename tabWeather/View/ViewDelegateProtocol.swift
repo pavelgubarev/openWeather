@@ -9,8 +9,6 @@ import Foundation
 
 protocol ViewDelegate {
     
-    func displayLocationDenied()
-    
     func displayWeather(weatherData: WeatherData)
 
     func displayForecast(forecastData: FullForecast)
@@ -18,5 +16,9 @@ protocol ViewDelegate {
     func setCities(withCities: [City])
     
     func setCurrentCity(cityID: Int)
+
+    func displayLocationDenied()
     
+    func displayConnectionError()
+
 }

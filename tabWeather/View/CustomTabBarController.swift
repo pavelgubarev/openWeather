@@ -55,6 +55,18 @@ class CustomTabBarController : UITabBarController, ViewDelegate {
         weatherVC?.dislayLocationDenied()
     }
     
+    func displayConnectionError() {
+        let refreshAlert = UIAlertController(title: "Connection Problem", message: "No internet or weather service problem. We'll try to show the latest data we have", preferredStyle: UIAlertController.Style.alert)
+
+        refreshAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
+            
+            
+             
+        }))
+
+        present(refreshAlert, animated: true, completion: nil)
+    }
+    
     func setCities(withCities: [City]) {
         citySelectVC?.setCities(withCities: withCities)
     }

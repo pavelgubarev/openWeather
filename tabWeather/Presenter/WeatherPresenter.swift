@@ -37,17 +37,22 @@ class WeatherPresenter {
     }
     
     func mainViewLoaded() {
-        weatherViewDelegate!.setCities(withCities: weatherModel.cities)
+        weatherViewDelegate?.setCities(withCities: weatherModel.cities)
 
-        weatherViewDelegate!.setCurrentCity(cityID: 0)
+        weatherViewDelegate?.setCurrentCity(cityID: 0)
     }
     
     func updateCurrentWeather() {
-        weatherModel.getCurrentWeatherFor(cityID : weatherModel.currentCity, completionHandler: { (result) -> (Void)  in            switch result {
-        case .success(let weatherData):
-            self.weatherViewDelegate!.displayWeather(weatherData: weatherData)
-        case .failure(let error):
-            print(error)
+        weatherModel.getCurrentWeatherFor(cityID : weatherModel.currentCity, completionHandler: { (result) -> (Void)  in
+            
+        switch result {
+            case .success(let weatherData):
+                self.weatherViewDelegate!.displayWeather(weatherData: weatherData)
+            case .failure(let error):
+                print(error)
+                DispatchQueue.main.async() {
+                    self.weatherViewDelegate?.displayConnectionError()
+                }
         }
         
         })
@@ -60,7 +65,8 @@ class WeatherPresenter {
     }
     
     func setNewLocalLocationAndUpdate() {
-        weatherModel.setLocalLocation(lat: weatherModel.cities[weatherModel.currentCity].geo_lat, long: weatherModel.cities[weatherModel.currentCity].geo_long)
+        weatherModel.setLocalLocation(lat: weatherModel.cities[weatherModel.currentCity].geo_lat,
+                                      long: weatherModel.cities[weatherModel.currentCity].geo_long)
         updateCurrentWeather()
     }
     
@@ -70,9 +76,19 @@ class WeatherPresenter {
     }
     
     func updateForecast() {
-//        weatherModel.getForecastFor(cityID : weatherModel.currentCity, completionHandler: { (forecastData) -> (Void)  in
-//            self.weatherViewDelegate!.displayForecast(forecastData: forecastData)
-//        })
+        weatherModel.getForecastFor(cityID : weatherModel.currentCity, completionHandler: { (result) -> (Void)  in
+            switch result {
+                case .success(let forecastData):
+                    self.weatherViewDelegate!.displayForecast(forecastData: forecastData)
+                case .failure(let error):
+                    print(error)
+                    DispatchQueue.main.async() {
+                        self.weatherViewDelegate?.displayConnectionError()
+                    }
+            }
+
+            
+        })
     }
     
     func forecastDidAppear() {

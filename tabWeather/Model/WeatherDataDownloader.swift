@@ -14,6 +14,7 @@ enum WeatherServiceError : Error {
 
 extension WeatherModel {
     
+    
     func getCurrentWeatherFor(cityID : Int, completionHandler: @escaping (Result<WeatherData, WeatherServiceError>) -> Void) {
         
         let url = URL(string: self.dataURLBaseSting + "current?" +
@@ -60,48 +61,58 @@ extension WeatherModel {
         
     }
     
-//    func getForecastFor(cityID : Int, completionHandler: @escaping CompletionHandlerForecast) {
-//        
-//        let url = URL(string: self.dataURLBaseSting + "forecast/daily?" +
-//            "&lat=" + cities[cityID].geo_lat +
-//            "&lon=" + cities[cityID].geo_long
-//            + key )!
-//        
-//        let request = URLRequest(url: url)
-//                
-//        let task = URLSession.shared.dataTask(with: request) {data, response, error in
-//
-//            var forecast = FullForecast()
-//
-//            if error != nil {
-//                print(error!.localizedDescription)
-//                return
-//            }
-//            guard let data = data, let json = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as? [String: Any]  else {
-//                return
-//            }
-//        
-//            guard let jsonData = json["data"] as? [[String: AnyObject]] else { return }
-//
-//            for oneDateForecast in jsonData {
-//                let dateString = oneDateForecast["valid_date"]  as! String
-//                let date = dateString.toDate(dateFormat: "yyyy-MM-dd")
-//                let temp = oneDateForecast["temp"] as! Double
-//                
-//                if date != nil {
-//                    forecast.append(forecastOneDay(date: date!, temp: temp ))
-//                }
-//            }
-//            
-//            DispatchQueue.main.async() {
-//                completionHandler(forecast)
-//            }
-//            
-//        }
-//        task.resume()
-//        
-//    }
-//    
+    func getForecastFor(cityID : Int, completionHandler: @escaping (Result<FullForecast, WeatherServiceError>) -> Void) {
+        
+        let url = URL(string: self.dataURLBaseSting + "forecast/daily?" +
+            "&lat=" + cities[cityID].geo_lat +
+            "&lon=" + cities[cityID].geo_long
+            + key )!
+        
+        let request = URLRequest(url: url)
+                
+        let task = URLSession.shared.dataTask(with: request) {data, response, error in
+
+            var forecast = FullForecast()
+
+            if error != nil {
+                completionHandler(.failure(.connectionError))
+                return
+            }
+            guard let data = data, let json = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as? [String: Any]  else {
+                completionHandler(.failure(.parsingError))
+                return
+            }
+        
+            guard let jsonData = json["data"] as? [[String: AnyObject]] else { return }
+
+            for oneDateForecast in jsonData {
+                guard let dateString = oneDateForecast["valid_date"]  as? String else {
+                    completionHandler(.failure(.parsingError))
+                    return
+                }
+                let date = dateString.toDate(dateFormat: "yyyy-MM-dd")
+                guard let temp = oneDateForecast["temp"] as? Double else {
+                    completionHandler(.failure(.parsingError))
+                    return
+                }
+                
+                if date != nil {
+                    forecast.append(forecastOneDay(date: date!, temp: temp ))
+                } else {
+                    completionHandler(.failure(.parsingError))
+                    return
+                }
+            }
+            
+            DispatchQueue.main.async() {
+                completionHandler(Result.success(forecast))
+            }
+            
+        }
+        task.resume()
+        
+    }
+    
     
 }
 

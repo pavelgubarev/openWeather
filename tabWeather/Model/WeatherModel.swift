@@ -51,7 +51,6 @@ class WeatherModel : NSObject, CLLocationManagerDelegate {
     func requestLocation() {
         locationManager?.requestAlwaysAuthorization()
     }
-
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
             switch status {
