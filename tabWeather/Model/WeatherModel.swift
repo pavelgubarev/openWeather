@@ -7,13 +7,14 @@
 
 import Foundation
 import CoreLocation
+import CoreData
 
-struct forecastOneDay {
+struct ForecastOneDay {
     var date : Date
     var temp : Double
 }
 
-typealias FullForecast = [forecastOneDay]
+typealias FullForecast = [ForecastOneDay]
 
 
 class WeatherModel : NSObject, CLLocationManagerDelegate {
@@ -28,11 +29,16 @@ class WeatherModel : NSObject, CLLocationManagerDelegate {
     
     var cities = [City]()
     
+    var managedContext : NSManagedObjectContext!
+        
     let dataURLBaseSting = "https://api.weatherbit.io/v2.0/"
     let key = "&key=ff7cd68bcfa94069a7027691119b8e29"
         
     override init() {
         super.init()
+        
+        initCoreData()
+        
         locationManager = CLLocationManager()
         locationManager?.delegate = self
         

@@ -97,7 +97,7 @@ extension WeatherModel {
                 }
                 
                 if date != nil {
-                    forecast.append(forecastOneDay(date: date!, temp: temp ))
+                    forecast.append(ForecastOneDay(date: date!, temp: temp ))
                 } else {
                     completionHandler(.failure(.parsingError))
                     return
