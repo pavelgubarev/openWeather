@@ -7,13 +7,6 @@
 
 import Foundation
 
-enum SkyCondition {
-    case rain
-    case snow
-    case clear
-    case clouds
-}
-
 struct WeatherData {    
     var cityName: String
     var temp: Double
