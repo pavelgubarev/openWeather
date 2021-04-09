@@ -19,7 +19,7 @@ class CitiesListViewController : UITableViewController {
         self.weatherPresenter = weatherPresenter
     }
     
-    func setCities(withCities : [City]) {
+    func setCitiesList(withCities : [City]) {
         self.cities = withCities
     }
     

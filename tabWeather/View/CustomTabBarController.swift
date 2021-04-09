@@ -67,8 +67,8 @@ class CustomTabBarController : UITabBarController, ViewDelegate {
         present(refreshAlert, animated: true, completion: nil)
     }
     
-    func setCities(withCities: [City]) {
-        citySelectVC?.setCities(withCities: withCities)
+    func setCitiesList(withCities: [City]) {
+        citySelectVC?.setCitiesList(withCities: withCities)
     }
     
     func setCurrentCity(cityID: Int) {

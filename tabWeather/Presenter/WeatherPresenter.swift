@@ -37,8 +37,7 @@ class WeatherPresenter {
     }
     
     func mainViewLoaded() {
-        weatherViewDelegate?.setCities(withCities: weatherModel.cities)
-
+        weatherViewDelegate?.setCitiesList(withCities: weatherModel.cities)
         weatherViewDelegate?.setCurrentCity(cityID: 0)
     }
     

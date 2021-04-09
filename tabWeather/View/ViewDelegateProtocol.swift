@@ -13,7 +13,7 @@ protocol ViewDelegate {
 
     func displayForecast(forecastData: FullForecast)
 
-    func setCities(withCities: [City])
+    func setCitiesList(withCities: [City])
     
     func setCurrentCity(cityID: Int)
 
