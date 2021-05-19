@@ -10,7 +10,7 @@ import UIKit
 
 class ForecastViewController : UITableViewController {
     
-    private weak var weatherPresenter : WeatherPresenter?
+    private weak var presenter : ForecastPresenter?
     
     var forecast = FullForecast()
     
@@ -18,15 +18,15 @@ class ForecastViewController : UITableViewController {
     
     func setForecast(withForecast : FullForecast) {
         self.forecast = withForecast
-    }   
+    }
     
-    func setPresenter(weatherPresenter : WeatherPresenter?) {
-        self.weatherPresenter = weatherPresenter
+    func set(presenter : ForecastPresenter?) {
+        self.presenter = presenter
     }
     
     override func viewDidAppear(_ animated: Bool) {
         formatter.dateStyle = .short
-        weatherPresenter?.forecastDidAppear()
+        presenter?.forecastDidAppear()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

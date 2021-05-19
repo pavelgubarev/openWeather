@@ -7,18 +7,12 @@
 
 import Foundation
 
-protocol ViewDelegate {
+protocol CitiesViewDelegate {
     
-    func displayWeather(weatherData: WeatherData)
-
-    func displayForecast(forecastData: FullForecast)
 
     func setCitiesList(withCities: [City])
     
     func setCurrentCity(cityID: Int)
 
-    func displayLocationDenied()
     
-    func displayConnectionError()
-
 }

@@ -8,15 +8,15 @@
 import Foundation
 import UIKit
 
-class CitiesListViewController : UITableViewController {
+class CitiesListViewController : UITableViewController, CitiesViewDelegate {
     
     private var cities = [City]()
     private var currentCityID : Int = 0
     
-    private weak var weatherPresenter : WeatherPresenter?
+    private weak var presenter: CitiesPresenter?
    
-    func setPresenter(weatherPresenter : WeatherPresenter?) {
-        self.weatherPresenter = weatherPresenter
+    func set(presenter : CitiesPresenter?) {
+        self.presenter = presenter
     }
     
     func setCitiesList(withCities : [City]) {
@@ -32,7 +32,7 @@ class CitiesListViewController : UITableViewController {
             cell.accessoryType = .checkmark
             currentCityID = indexPath.row
             tableView.reloadData()
-            weatherPresenter?.didCitySelect(cityID: indexPath.row)
+            presenter?.didCitySelect(cityID: indexPath.row)
         }
     }
    

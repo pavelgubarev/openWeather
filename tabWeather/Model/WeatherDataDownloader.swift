@@ -48,9 +48,8 @@ extension WeatherModel {
                 completionHandler(.failure(.parsingError))
                 return
             }
-            let sky = SkyCondition.clear
 
-            let weatherData = WeatherData(cityName: cityName, temp:tempDouble, sky: sky)
+            let weatherData = WeatherData(cityName: cityName, temp:tempDouble)
 
             DispatchQueue.main.async() {
                 completionHandler(Result.success(weatherData))

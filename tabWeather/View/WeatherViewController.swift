@@ -38,16 +38,5 @@ class WeatherViewController : UIViewController {
         commentLabel.text = "-"
     }
     
-    func dislayLocationDenied() {
-        let refreshAlert = UIAlertController(title: "Location is not available", message: "Please allow location in settings.", preferredStyle: UIAlertController.Style.alert)
-
-        refreshAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
-            
-            self.displayBlankWeather()
-             
-        }))
-
-        present(refreshAlert, animated: true, completion: nil)
-    }
-    
+   
 }
