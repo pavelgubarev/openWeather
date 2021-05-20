@@ -46,6 +46,7 @@ class WeatherModel : NSObject, CLLocationManagerDelegate {
     }
     
     func setLocalLocation(lat: String, long: String) {
+        
         let updatedLocalCity = City(id: 0, name: cities[0].name, geo_lat: lat, geo_long: long)
         cities[0] = updatedLocalCity
     }

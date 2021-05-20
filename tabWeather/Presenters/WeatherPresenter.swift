@@ -19,7 +19,7 @@ class WeatherPresenter : Presenter  {
     }
     
     func updateCurrentWeather() {
-        model.getCurrentWeatherFor(cityID : model.currentCity, completionHandler: { (result) -> (Void)  in            
+        model.getCurrentWeatherFor(cityID : model.currentCity, completionHandler: { (result) -> (Void)  in
             switch result {
             case .success(let weatherData):
                 self.weatherViewDelegate!.displayWeather(weatherData: weatherData)

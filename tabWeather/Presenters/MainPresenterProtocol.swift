@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol MainPresenterProtocol {
+protocol ParentPresenterProtocol {
     
     func setNewLocalLocationAndUpdate()
     

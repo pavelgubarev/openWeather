@@ -8,7 +8,7 @@
 import Foundation
 import CoreLocation
 
-class MainPresenter : MainPresenterProtocol {
+class MainPresenter : ParentPresenterProtocol {
     private var model : WeatherModel
     private var mainViewDelegate : MainViewDelegate?
     private var citiesPresenter : CitiesPresenter?

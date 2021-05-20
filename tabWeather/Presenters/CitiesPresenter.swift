@@ -23,7 +23,7 @@ class CitiesPresenter : Presenter  {
     }
     
     func didCitySelect(cityID : Int) {
-         model.currentCity = cityID
+        model.currentCity = cityID
         parentPresenter?.setNewLocalLocationAndUpdate()
      }
 }

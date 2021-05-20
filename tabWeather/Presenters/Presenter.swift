@@ -10,14 +10,14 @@ import Foundation
 class Presenter {
     
     let model : WeatherModel
-    private(set) var parentPresenter : MainPresenterProtocol?
+    private(set) var parentPresenter : ParentPresenterProtocol?
 
     
     init(withModel: WeatherModel) {
         self.model = withModel
     }
     
-    func setParent(presenter: MainPresenterProtocol) {
+    func setParent(presenter: ParentPresenterProtocol) {
         self.parentPresenter = presenter
     }
 }
