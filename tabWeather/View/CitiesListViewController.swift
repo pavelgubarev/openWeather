@@ -14,7 +14,7 @@ class CitiesListViewController : UITableViewController, CitiesViewDelegate {
     private var currentCityID : Int = 0
     
     private weak var presenter: CitiesPresenter?
-   
+    
     func set(presenter : CitiesPresenter?) {
         self.presenter = presenter
     }
@@ -26,7 +26,7 @@ class CitiesListViewController : UITableViewController, CitiesViewDelegate {
     func setCurrentCity(cityID: Int) {
         currentCityID = cityID
     }
-
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath as IndexPath) {
             cell.accessoryType = .checkmark
@@ -35,25 +35,29 @@ class CitiesListViewController : UITableViewController, CitiesViewDelegate {
             presenter?.didCitySelect(cityID: indexPath.row)
         }
     }
-   
+    
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.cities.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CityListCell", for: indexPath) as! CityListCell
         
-        cell.cityName.text = self.cities[indexPath.row].name
+        let reusableCellID = "CityListCell"
+        let cell = tableView.dequeueReusableCell(withIdentifier: reusableCellID, for: indexPath)
         
-        if indexPath.row == currentCityID  {
-            cell.accessoryType = .checkmark
+        if let cityCell = cell as? CityListCell {
+            cityCell.set(cityName: self.cities[indexPath.row].name)
+            if indexPath.row == currentCityID  {
+                cityCell.accessoryType = .checkmark
+            } else {
+                cityCell.accessoryType = .none
+            }
+            
+            return cityCell            
         } else {
-            cell.accessoryType = .none
+            return cell
         }
-                
-        return cell
-        
     }
     
 }

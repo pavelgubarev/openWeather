@@ -12,6 +12,10 @@ import UIKit
 
 class CityListCell: UITableViewCell {
 
-    @IBOutlet weak var cityName : UILabel!
+    @IBOutlet private weak var cityName : UILabel!
+    
+    func set(cityName : String) {
+        self.cityName.text = cityName
+    }
 
 }

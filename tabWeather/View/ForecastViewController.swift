@@ -8,12 +8,10 @@
 import Foundation
 import UIKit
 
-class ForecastViewController : UITableViewController {
+class ForecastViewController : UITableViewController, ForecastViewDelegate {
     
-    private weak var presenter : ForecastPresenter?
-    
+    private weak var presenter : ForecastPresenter?    
     var forecast = FullForecast()
-    
     let formatter = DateFormatter()
     
     func setForecast(withForecast : FullForecast) {
@@ -24,6 +22,10 @@ class ForecastViewController : UITableViewController {
         self.presenter = presenter
     }
     
+    func displayForecast(forecastData: FullForecast) {
+        forecast = forecastData
+        tableView.reloadData()
+    }
     override func viewDidAppear(_ animated: Bool) {
         formatter.dateStyle = .short
         presenter?.forecastDidAppear()

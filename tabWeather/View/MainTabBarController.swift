@@ -10,55 +10,45 @@ import UIKit
 
 class MainTabBarController : UITabBarController, MainViewDelegate {
 
-
-    
-
-    private let mainPresenter = MainPresenter(withModel: WeatherModel())
-    private let weatherPresenter = WeatherPresenter(withModel: WeatherModel())
-    private let forecastPresenter = ForecastPresenter(withModel: WeatherModel())
-    private let citiesPresenter = CitiesPresenter(withModel: WeatherModel())
-
     private weak var weatherVC : WeatherViewController?
     private weak var forecastVC : ForecastViewController?
     private weak var citySelectVC : CitiesListViewController?
     
-    
-    func buildArchitecture() {
-        
-        citiesPresenter.setParent(presenter: mainPresenter)
-        forecastPresenter.setParent(presenter: mainPresenter)
-        
-        mainPresenter.setChildPresenters(citiesPresenter: citiesPresenter, weatherPresenter: weatherPresenter)
-        
-        weatherVC = self.viewControllers?[0] as? WeatherViewController
-
-        forecastVC = self.viewControllers?[1] as? ForecastViewController
-        forecastVC!.set(presenter: forecastPresenter)
-        
-        citySelectVC = self.viewControllers?[2] as? CitiesListViewController
-        citySelectVC!.set(presenter: citiesPresenter)
-        
-    }
+    private let architecture = ArchitectureAssembler()
 
     override func viewDidLoad() {
         
-        self.tabBar.items![0].image = UIImage(named: "weatherIcon")
-        self.tabBar.items![0].selectedImage = UIImage(named: "weatherSelected")
-        self.tabBar.items![0].imageInsets = UIEdgeInsets(top: 0, left: -10, bottom: 25, right: 0)
+        self.tabBar.items?[0].image = UIImage(named: "weatherIcon")
+        self.tabBar.items?[0].selectedImage = UIImage(named: "weatherSelected")
+        self.tabBar.items?[0].imageInsets = UIEdgeInsets(top: 0, left: -10, bottom: 25, right: 0)
         
-        mainPresenter.mainViewLoaded()
+        architecture.assemble()
+        assembleViews()
 
+        architecture.mainPresenter.mainViewLoaded()
+        
+    }
+    
+    func assembleViews() {
+        weatherVC = self.viewControllers?[0] as? WeatherViewController
+        architecture.weatherPresenter.setViewDelegate(delegate: weatherVC)
+        weatherVC?.set(presenter: architecture.weatherPresenter)
+
+        forecastVC = self.viewControllers?[1] as? ForecastViewController
+        forecastVC?.set(presenter: architecture.forecastPresenter)
+        architecture.forecastPresenter.setViewDelegate(delegate: forecastVC)
+        
+        citySelectVC = self.viewControllers?[2] as? CitiesListViewController
+        citySelectVC?.set(presenter: architecture.citiesPresenter)
+        architecture.citiesPresenter.setViewDelegate(delegate: citySelectVC)
+                
     }
 
-  
     
     func displayConnectionError() {
         let refreshAlert = UIAlertController(title: "Connection Problem", message: "No internet or weather service problem. We'll try to show the latest data we have", preferredStyle: UIAlertController.Style.alert)
 
         refreshAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
-            
-            
-             
         }))
 
         present(refreshAlert, animated: true, completion: nil)
@@ -70,7 +60,7 @@ class MainTabBarController : UITabBarController, MainViewDelegate {
 
         refreshAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
             
-            self.mainPresenter.displayBlankWeather()
+            self.architecture.mainPresenter.displayBlankWeather()
              
         }))
 

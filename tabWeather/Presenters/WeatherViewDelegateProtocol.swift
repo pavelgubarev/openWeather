@@ -11,10 +11,6 @@ protocol WeatherViewDelegate {
     
     func displayWeather(weatherData: WeatherData)
 
-    func displayLocationDenied()
-    
-    func displayConnectionError()
-    
     func displayBlankWeather()
 
 }

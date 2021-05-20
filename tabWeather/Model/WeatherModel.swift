@@ -19,7 +19,7 @@ typealias FullForecast = [ForecastOneDay]
 
 class WeatherModel : NSObject, CLLocationManagerDelegate {
     
-    private weak var presenter : MainPresenter?
+    private weak var mainPresenter : MainPresenter?
     
     private var locationManager: CLLocationManager?
     
@@ -51,7 +51,7 @@ class WeatherModel : NSObject, CLLocationManagerDelegate {
     }
     
     func setPresenter(withPresenter : MainPresenter) {
-        presenter = withPresenter
+        mainPresenter = withPresenter
     }
     
     func requestLocation() {
@@ -66,7 +66,7 @@ class WeatherModel : NSObject, CLLocationManagerDelegate {
                 self.getCurrentLocation()
                 break
             case .restricted, .denied:
-                self.presenter?.displayLocationDenied()
+                self.mainPresenter?.displayLocationDenied()
                 break
             @unknown default:
                 break
@@ -81,7 +81,7 @@ class WeatherModel : NSObject, CLLocationManagerDelegate {
         if currentLocation == nil {
             let locValue : CLLocationCoordinate2D = manager.location!.coordinate
             currentLocation = locValue
-            presenter?.gotLocalLocation(location : locValue)
+            mainPresenter?.gotLocalLocation(location : locValue)
         } else {
             locationManager?.stopUpdatingLocation()
         }

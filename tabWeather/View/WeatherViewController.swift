@@ -8,12 +8,18 @@
 import Foundation
 import UIKit
 
-class WeatherViewController : UIViewController {
+class WeatherViewController : UIViewController, WeatherViewDelegate {    
     
     @IBOutlet weak var cityNameLabel : UILabel!
     @IBOutlet weak var tempLabel : UILabel!
     @IBOutlet weak var commentLabel : UILabel!
-
+    
+    private weak var presenter : WeatherPresenter?
+    
+    func set(presenter : WeatherPresenter?) {
+        self.presenter = presenter
+    }    
+    
     func displayWeather(weatherData: WeatherData) {
         cityNameLabel.text = weatherData.cityName
         tempLabel.text = String(weatherData.temp)
@@ -38,5 +44,9 @@ class WeatherViewController : UIViewController {
         commentLabel.text = "-"
     }
     
-   
+    override func viewDidAppear(_ animated: Bool) {
+        presenter?.onWeatherViewAppear()
+    }
+    
+    
 }

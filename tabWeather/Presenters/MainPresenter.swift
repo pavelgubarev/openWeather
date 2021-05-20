@@ -9,36 +9,32 @@ import Foundation
 import CoreLocation
 
 class MainPresenter : MainPresenterProtocol {
-    
-    private let weatherModel : WeatherModel
-    
+    private var model : WeatherModel
     private var mainViewDelegate : MainViewDelegate?
+    private var citiesPresenter : CitiesPresenter?
+    private var weatherPresenter : WeatherPresenter?
 
     init(withModel: WeatherModel) {
-        self.weatherModel = withModel
+        self.model = withModel
     }
     
     func setViewDelegate(delegate : MainViewDelegate?) {
         self.mainViewDelegate = delegate
     }
-    
-    var citiesPresenter : CitiesPresenter?
-    var weatherPresenter : WeatherPresenter?
 
     func setChildPresenters(citiesPresenter : CitiesPresenter, weatherPresenter : WeatherPresenter) {
         self.citiesPresenter = citiesPresenter
         self.weatherPresenter = weatherPresenter
     }
     
-    func mainViewLoaded() {
+    func mainViewLoaded() {        
         citiesPresenter?.setCitiesList()
     }
     
-    func displayBlankWeather() {
-        weatherPresenter?.displayBlankWeather()
-    }
-    
     func setNewLocalLocationAndUpdate() {
+        model.setLocalLocation(lat: model.cities[model.currentCity].geo_lat,
+                                              long: model.cities[model.currentCity].geo_long)
+        weatherPresenter?.updateCurrentWeather()
     }
     
     func displayConnectionError() {
@@ -49,5 +45,13 @@ class MainPresenter : MainPresenterProtocol {
         mainViewDelegate?.displayLocationDenied()
     }
     
+    func gotLocalLocation(location : CLLocationCoordinate2D) {
+        model.setLocalLocation(lat: String(location.latitude), long: String(location.longitude))
+        weatherPresenter?.updateCurrentWeather()
+    }
+    
+    func displayBlankWeather() {
+        weatherPresenter?.displayBlankWeather()
+    }
     
 }

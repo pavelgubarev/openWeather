@@ -8,34 +8,22 @@
 import Foundation
 import CoreLocation
 
-class CitiesPresenter {
+class CitiesPresenter : Presenter  {
     
-    private let weatherModel : WeatherModel
-    
-    private var viewDelegate : CitiesViewDelegate?
-    
-    private var parentPresenter : MainPresenterProtocol?
-    
-    init(withModel: WeatherModel) {
-        self.weatherModel = withModel
-    }
-    
+    private var citiesViewDelegate : CitiesViewDelegate?
+        
     func setViewDelegate(delegate : CitiesViewDelegate?) {
-        self.viewDelegate = delegate        
+        self.citiesViewDelegate = delegate        
     }
-    
-    func setParent(presenter: MainPresenterProtocol) {
-        self.parentPresenter = presenter
-    }
-    
-  
+
     func setCitiesList() {
-        viewDelegate?.setCitiesList(withCities: weatherModel.cities)
-        viewDelegate?.setCurrentCity(cityID: 0)
+        
+        citiesViewDelegate?.setCitiesList(withCities: model.cities)
+        citiesViewDelegate?.setCurrentCity(cityID: 0)
     }
     
     func didCitySelect(cityID : Int) {
-         weatherModel.currentCity = cityID
+         model.currentCity = cityID
         parentPresenter?.setNewLocalLocationAndUpdate()
      }
 }

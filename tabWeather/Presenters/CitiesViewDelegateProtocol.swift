@@ -9,10 +9,8 @@ import Foundation
 
 protocol CitiesViewDelegate {
     
-
     func setCitiesList(withCities: [City])
     
     func setCurrentCity(cityID: Int)
 
-    
 }

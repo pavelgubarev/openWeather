@@ -8,9 +8,7 @@
 import Foundation
 
 protocol ForecastViewDelegate {
-    
 
     func displayForecast(forecastData: FullForecast)
-
 
 }
