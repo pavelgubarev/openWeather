@@ -22,7 +22,7 @@ class WeatherPresenter : Presenter  {
         model.getCurrentWeatherFor(cityID : model.currentCity, completionHandler: { (result) -> (Void)  in
             switch result {
             case .success(let weatherData):
-                self.weatherViewDelegate!.displayWeather(weatherData: weatherData)
+                self.weatherViewDelegate?.displayWeather(weatherData: weatherData)
             case .failure(let error):
                 print(error)
                 DispatchQueue.main.async() {

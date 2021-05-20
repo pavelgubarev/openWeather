@@ -41,7 +41,6 @@ class MainTabBarController : UITabBarController, MainViewDelegate {
         citySelectVC = self.viewControllers?[2] as? CitiesListViewController
         citySelectVC?.set(presenter: architecture.citiesPresenter)
         architecture.citiesPresenter.setViewDelegate(delegate: citySelectVC)
-                
     }
 
     
@@ -57,13 +56,11 @@ class MainTabBarController : UITabBarController, MainViewDelegate {
 
     func displayLocationDenied() {
         let refreshAlert = UIAlertController(title: "Location is not available", message: "Please allow location in settings.", preferredStyle: UIAlertController.Style.alert)
-
         refreshAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
             
             self.architecture.mainPresenter.displayBlankWeather()
              
         }))
-
         present(refreshAlert, animated: true, completion: nil)
     }
     

@@ -20,13 +20,9 @@ typealias FullForecast = [ForecastOneDay]
 class WeatherModel : NSObject, CLLocationManagerDelegate {
     
     private weak var mainPresenter : MainPresenter?
-    
     private var locationManager: CLLocationManager?
-    
     private var currentLocation: CLLocationCoordinate2D?
-
     var currentCity : Int = 0
-    
     var cities = [City]()
     
     var managedContext : NSManagedObjectContext!

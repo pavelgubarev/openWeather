@@ -10,7 +10,6 @@ import Foundation
 struct WeatherData {    
     var cityName: String
     var temp: Double
-//    var sky: SkyCondition
 }
 
 struct City: Encodable, Decodable {

@@ -22,7 +22,7 @@ extension WeatherModel {
         deleteAllData("Forecast")
     }
     
-    func readForecast() -> FullForecast {
+    func readForecast() -> FullForecast? {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Forecast")
         
         var forecast = FullForecast()
@@ -32,12 +32,11 @@ extension WeatherModel {
             for managedObject in results
             {
                 let managedObjectData : NSManagedObject = managedObject
-                let date = managedObjectData.value(forKey: "date") as! Date
-                let temp = managedObjectData.value(forKey: "temperature") as! Double
+                                
+                guard let date = managedObjectData.value(forKey: "date") as? Date else { return nil }
+                guard let temp = managedObjectData.value(forKey: "temperature") as? Double else {return nil}
                 let oneday = ForecastOneDay(date: date, temp: temp)
-                
                 forecast.append(oneday)
-                
             }
           } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
@@ -71,7 +70,6 @@ extension WeatherModel {
     func deleteAllData(_ entity:String) {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
         fetchRequest.returnsObjectsAsFaults = false
-        
         do
             {
                 let results = try managedContext.fetch(fetchRequest)
