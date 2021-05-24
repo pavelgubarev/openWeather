@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 import UIKit
 
-extension WeatherModel {
+extension Model {
     
     func initCoreData() {
         guard let appDelegate =

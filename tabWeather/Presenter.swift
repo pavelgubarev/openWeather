@@ -9,11 +9,11 @@ import Foundation
 
 class Presenter {
     
-    let model : WeatherModel
+    let model : Model
     private(set) var parentPresenter : ParentPresenterProtocol?
 
     
-    init(withModel: WeatherModel) {
+    init(withModel: Model) {
         self.model = withModel
     }
     

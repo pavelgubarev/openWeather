@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CitiesListViewController : UITableViewController, CitiesViewDelegate {
+final class CitiesListViewController : UITableViewController, CitiesViewDelegate {
     
     private var cities = [City]()
     private var currentCityID : Int = 0

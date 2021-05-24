@@ -1,5 +1,5 @@
 //
-//  WeatherModel.swift
+//  Model.swift
 //  tabWeather
 //
 //  Created by Павел Губарев on 05.04.2021.
@@ -17,7 +17,7 @@ struct ForecastOneDay {
 typealias FullForecast = [ForecastOneDay]
 
 
-class WeatherModel : NSObject, CLLocationManagerDelegate {
+final class Model : NSObject, CLLocationManagerDelegate {
     
     private weak var mainPresenter : MainPresenter?
     private var locationManager: CLLocationManager?

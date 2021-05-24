@@ -7,9 +7,7 @@
 
 import Foundation
 
-extension WeatherModel {
-    
-
+extension Model {    
     func loadCities() {
      
             let url = Bundle.main.url(forResource: "cities", withExtension: "json")!

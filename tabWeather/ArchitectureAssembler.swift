@@ -15,7 +15,7 @@ class ArchitectureAssembler {
     var citiesPresenter : CitiesPresenter!
     
     func assemble() {
-        let model = WeatherModel()
+        let model = Model()
         
         mainPresenter = MainPresenter(withModel: model)
         weatherPresenter = WeatherPresenter(withModel: model)

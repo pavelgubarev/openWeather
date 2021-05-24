@@ -10,7 +10,7 @@ import Foundation
 
 import UIKit
 
-class CityListCell: UITableViewCell {
+final class CityListCell: UITableViewCell {
 
     @IBOutlet private weak var cityName : UILabel!
     

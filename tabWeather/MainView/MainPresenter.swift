@@ -8,13 +8,14 @@
 import Foundation
 import CoreLocation
 
-class MainPresenter : ParentPresenterProtocol {
-    private var model : WeatherModel
+final class MainPresenter : ParentPresenterProtocol {
+    
+    private var model : Model
     private var mainViewDelegate : MainViewDelegate?
     private var citiesPresenter : CitiesPresenter?
     private var weatherPresenter : WeatherPresenter?
 
-    init(withModel: WeatherModel) {
+    init(withModel: Model) {
         self.model = withModel
     }
     

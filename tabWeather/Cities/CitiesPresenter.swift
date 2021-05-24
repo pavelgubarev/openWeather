@@ -8,7 +8,7 @@
 import Foundation
 import CoreLocation
 
-class CitiesPresenter : Presenter  {
+final class CitiesPresenter : Presenter  {
     
     private var citiesViewDelegate : CitiesViewDelegate?
         

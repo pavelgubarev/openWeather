@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class MainTabBarController : UITabBarController, MainViewDelegate {
+final class MainTabBarController : UITabBarController, MainViewDelegate {
 
     private weak var weatherVC : WeatherViewController?
     private weak var forecastVC : ForecastViewController?
