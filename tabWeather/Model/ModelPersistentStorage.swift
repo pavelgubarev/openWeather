@@ -12,10 +12,7 @@ import UIKit
 extension Model {
     
     func initCoreData() {
-        guard let appDelegate =
-                UIApplication.shared.delegate as? AppDelegate else { return }
-        managedContext = appDelegate.persistentContainer.viewContext
-               
+        managedContext = CoreDataManager.sharedManager.persistentContainer.viewContext
     }
     
     func cleanForecast() {

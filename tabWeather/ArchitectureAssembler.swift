@@ -9,20 +9,17 @@ import Foundation
 
 class ArchitectureAssembler {
     
-    var mainPresenter : MainPresenter!
-    var weatherPresenter : WeatherPresenter!
-    var forecastPresenter : ForecastPresenter!
-    var citiesPresenter : CitiesPresenter!
+    let model = Model()
+    
+    lazy var mainPresenter : MainPresenter = MainPresenter(withModel: model)
+    lazy var weatherPresenter : WeatherPresenter = WeatherPresenter(withModel: model)
+    lazy var forecastPresenter : ForecastPresenter = ForecastPresenter(withModel: model)
+    lazy var citiesPresenter : CitiesPresenter = CitiesPresenter(withModel: model)
     
     func assemble() {
-        let model = Model()
         
-        mainPresenter = MainPresenter(withModel: model)
-        weatherPresenter = WeatherPresenter(withModel: model)
-        forecastPresenter = ForecastPresenter(withModel: model)
-        citiesPresenter = CitiesPresenter(withModel: model)
-        
-        _ = [citiesPresenter, forecastPresenter, weatherPresenter].map{ $0.setParent(presenter: mainPresenter)}
+        for presenter in [citiesPresenter, forecastPresenter, weatherPresenter] { presenter.setParent(presenter: mainPresenter)
+        }
         
         model.setPresenter(withPresenter: mainPresenter)
         

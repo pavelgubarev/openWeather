@@ -5,7 +5,6 @@
 //  Created by Павел Губарев on 05.04.2021.
 //
 
-import Foundation
 import UIKit
 
 class WeatherViewController : UIViewController, WeatherViewDelegate {    
@@ -24,15 +23,18 @@ class WeatherViewController : UIViewController, WeatherViewDelegate {
         cityNameLabel.text = weatherData.cityName
         tempLabel.text = String(weatherData.temp)
         switch weatherData {
-        case _ where weatherData.temp < 0 :
+        case _ where weatherData.temp < 0:
             commentLabel.text = "It's freezing!"
             break
-        case _ where weatherData.temp > 0 && weatherData.temp < 15 :
+
+        case _ where weatherData.temp > 0 && weatherData.temp < 15:
             commentLabel.text = "It's cold!"
             break
-        case _ where weatherData.temp >= 15 :
+
+        case _ where weatherData.temp >= 15:
             commentLabel.text = "It's ok."
             break
+
         default:
             commentLabel.text = ""
         }
@@ -45,8 +47,7 @@ class WeatherViewController : UIViewController, WeatherViewDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(false)
         presenter?.onWeatherViewAppear()
     }
-    
-    
 }
