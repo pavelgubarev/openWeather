@@ -4,10 +4,9 @@
 //
 //  Created by Павел Губарев on 05.04.2021.
 //
-
-import Foundation
-import CoreLocation
 import CoreData
+import CoreLocation
+import Foundation
 
 struct ForecastOneDay {
     var date : Date
@@ -16,16 +15,15 @@ struct ForecastOneDay {
 
 typealias FullForecast = [ForecastOneDay]
 
-
 final class Model : NSObject, CLLocationManagerDelegate {
     
     private weak var mainPresenter : MainPresenter?
     private var locationManager: CLLocationManager?
     private var currentLocation: CLLocationCoordinate2D?
     var currentCity : Int = 0
-    var cities = [City]()
+    var cities : [City] = []
     
-    var managedContext : NSManagedObjectContext!
+    var managedContext : NSManagedObjectContext?
         
     let dataURLBaseSting = "https://api.weatherbit.io/v2.0/"
     let key = "&key=ff7cd68bcfa94069a7027691119b8e29"
@@ -41,10 +39,13 @@ final class Model : NSObject, CLLocationManagerDelegate {
         self.loadCities()
     }
     
-    func setLocalLocation(lat: String, long: String) {
-        
-        let updatedLocalCity = City(id: 0, name: cities[0].name, geo_lat: lat, geo_long: long)
-        cities[0] = updatedLocalCity
+    func setLocalLocation(lat: String, long: String) {        
+        let updatedLocalCity = City(id: 0, name: cities[0].name, geoLat: lat, geoLong: long)
+        if cities.count > 0 {
+            cities[0] = updatedLocalCity
+        } else {
+            cities.append(updatedLocalCity)
+        }
     }
     
     func setPresenter(withPresenter : MainPresenter) {

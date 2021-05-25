@@ -19,7 +19,7 @@ final class CitiesPresenter : Presenter  {
     func setCitiesList() {
         
         citiesViewDelegate?.setCitiesList(withCities: model.cities)
-        citiesViewDelegate?.setCurrentCity(cityID: 0)
+        citiesViewDelegate?.setCurrentCity(cityId: 0)
     }
     
     func didCitySelect(cityID : Int) {

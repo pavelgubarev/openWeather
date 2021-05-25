@@ -11,10 +11,10 @@ class ArchitectureAssembler {
     
     let model = Model()
     
-    lazy var mainPresenter : MainPresenter = MainPresenter(withModel: model)
-    lazy var weatherPresenter : WeatherPresenter = WeatherPresenter(withModel: model)
-    lazy var forecastPresenter : ForecastPresenter = ForecastPresenter(withModel: model)
-    lazy var citiesPresenter : CitiesPresenter = CitiesPresenter(withModel: model)
+    lazy var mainPresenter : MainPresenter = MainPresenter(model: model)
+    lazy var weatherPresenter : WeatherPresenter = WeatherPresenter(model: model)
+    lazy var forecastPresenter : ForecastPresenter = ForecastPresenter(model: model)
+    lazy var citiesPresenter : CitiesPresenter = CitiesPresenter(model: model)
     
     func assemble() {
         

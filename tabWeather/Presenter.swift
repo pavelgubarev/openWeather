@@ -11,10 +11,9 @@ class Presenter {
     
     let model : Model
     private(set) var parentPresenter : ParentPresenterProtocol?
-
     
-    init(withModel: Model) {
-        self.model = withModel
+    init(model: Model) {
+        self.model = model
     }
     
     func setParent(presenter: ParentPresenterProtocol) {

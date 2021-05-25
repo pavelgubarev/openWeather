@@ -10,8 +10,8 @@ import UIKit
 
 final class CitiesListViewController : UITableViewController, CitiesViewDelegate {
 
-    private var cities = [City]()
-    private var currentCityID : Int = 0
+    private var cities : [City] = []
+    private var currentCityId : Int = 0
     
     private weak var presenter: CitiesPresenter?
     
@@ -19,26 +19,25 @@ final class CitiesListViewController : UITableViewController, CitiesViewDelegate
         self.presenter = presenter
     }
     
-    func setCitiesList(withCities : [City]) {
+    func setCitiesList(withCities: [City]) {
         self.cities = withCities
     }
     
-    func setCurrentCity(cityID: Int) {
-        currentCityID = cityID
+    func setCurrentCity(cityId: Int) {
+        currentCityId = cityId
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath as IndexPath) {
             cell.accessoryType = .checkmark
-            currentCityID = indexPath.row
+            currentCityId = indexPath.row
             tableView.reloadData()
             presenter?.didCitySelect(cityID: indexPath.row)
         }
     }
     
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.cities.count
+        cities.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -48,7 +47,7 @@ final class CitiesListViewController : UITableViewController, CitiesViewDelegate
         
         if let cityCell = cell as? CityListCell {
             cityCell.set(cityName: self.cities[indexPath.row].name)
-            if indexPath.row == currentCityID  {
+            if indexPath.row == currentCityId  {
                 cityCell.accessoryType = .checkmark
             } else {
                 cityCell.accessoryType = .none

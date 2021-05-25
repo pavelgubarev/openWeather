@@ -15,8 +15,8 @@ final class MainPresenter : ParentPresenterProtocol {
     private var citiesPresenter : CitiesPresenter?
     private var weatherPresenter : WeatherPresenter?
 
-    init(withModel: Model) {
-        self.model = withModel
+    init(model: Model) {
+        self.model = model
     }
     
     func setViewDelegate(delegate : MainViewDelegate?) {
@@ -33,8 +33,8 @@ final class MainPresenter : ParentPresenterProtocol {
     }
     
     func setNewLocalLocationAndUpdate() {
-        model.setLocalLocation(lat: model.cities[model.currentCity].geo_lat,
-                                              long: model.cities[model.currentCity].geo_long)
+        model.setLocalLocation(lat: model.cities[model.currentCity].geoLat,
+                               long: model.cities[model.currentCity].geoLong)
         weatherPresenter?.updateCurrentWeather()
     }
     

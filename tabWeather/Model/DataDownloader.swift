@@ -17,8 +17,8 @@ extension Model {
     func getCurrentWeatherFor(cityID : Int, completionHandler: @escaping (Result<WeatherData, WeatherServiceError>) -> Void) {
         
         let url = URL(string: self.dataURLBaseSting + "current?" +
-            "&lat=" + cities[cityID].geo_lat +
-            "&lon=" + cities[cityID].geo_long +
+            "&lat=" + cities[cityID].geoLat +
+            "&lon=" + cities[cityID].geoLong +
                         key )!
         
         let request = URLRequest(url: url)
@@ -38,6 +38,7 @@ extension Model {
                 completionHandler(.failure(.parsingError))
                 return
             }
+            
             let jsonDataFirst = jsonData[0]
             guard let cityName = jsonDataFirst["city_name"] as? String else {
                 completionHandler(.failure(.parsingError))
@@ -62,8 +63,8 @@ extension Model {
     func getForecastFor(cityID : Int, completionHandler: @escaping (Result<FullForecast, WeatherServiceError>) -> Void) {
         
         let url = URL(string: self.dataURLBaseSting + "forecast/daily?" +
-            "&lat=" + cities[cityID].geo_lat +
-            "&lon=" + cities[cityID].geo_long
+            "&lat=" + cities[cityID].geoLat +
+            "&lon=" + cities[cityID].geoLong
             + key )!
         
         let request = URLRequest(url: url)

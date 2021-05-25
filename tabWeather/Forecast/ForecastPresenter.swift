@@ -17,22 +17,22 @@ class ForecastPresenter : Presenter {
     }
     
     func updateForecast() {
-        model.getForecastFor(cityID : model.currentCity, completionHandler: { (result) -> (Void)  in
+        model.getForecastFor(cityID : model.currentCity, completionHandler: { [weak self] (result) -> (Void)  in
             switch result {
             
             case .success(let forecastData):
-                self.forecastViewDelegate!.displayForecast(forecastData: forecastData)
-                self.model.saveForecast(forecastData: forecastData)
+                self?.forecastViewDelegate!.displayForecast(forecastData: forecastData)
+                self?.model.saveForecast(forecastData: forecastData)
             
             case .failure(let error):
                 print(error)
                 DispatchQueue.main.async() {
-                    self.parentPresenter?.displayConnectionError()
+                    self?.parentPresenter?.displayConnectionError()
                 }
-                if let forecastDataFromStorage = self.model.readForecast() {
+                if let forecastDataFromStorage = self?.model.readForecast() {
                     if forecastDataFromStorage.count > 0 {
                         DispatchQueue.main.async() {
-                            self.forecastViewDelegate!.displayForecast(forecastData: forecastDataFromStorage)
+                            self?.forecastViewDelegate!.displayForecast(forecastData: forecastDataFromStorage)
                         }
                     }
                 }
@@ -44,6 +44,5 @@ class ForecastPresenter : Presenter {
     func forecastDidAppear() {
         updateForecast()
     }
-    
     
 }

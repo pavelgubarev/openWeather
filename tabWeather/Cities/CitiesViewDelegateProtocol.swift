@@ -11,6 +11,6 @@ protocol CitiesViewDelegate {
     
     func setCitiesList(withCities: [City])
     
-    func setCurrentCity(cityID: Int)
+    func setCurrentCity(cityId: Int)
 
 }

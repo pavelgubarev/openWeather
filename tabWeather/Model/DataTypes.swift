@@ -15,6 +15,6 @@ struct WeatherData {
 struct City: Encodable, Decodable {
     var id : Int
     var name: String
-    var geo_lat: String
-    var geo_long: String
+    var geoLat: String
+    var geoLong: String
 }

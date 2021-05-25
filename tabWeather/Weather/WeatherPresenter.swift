@@ -5,7 +5,7 @@ import CoreLocation
 class WeatherPresenter : Presenter  {
     
     private var weatherViewDelegate : WeatherViewDelegate?
-    
+
     func onWeatherViewAppear() {
         model.requestLocation()
     }
@@ -36,8 +36,8 @@ class WeatherPresenter : Presenter  {
     
     
     func setNewLocalLocationAndUpdate() {
-        model.setLocalLocation(lat: model.cities[model.currentCity].geo_lat,
-                               long: model.cities[model.currentCity].geo_long)
+        model.setLocalLocation(lat: model.cities[model.currentCity].geoLat,
+                               long: model.cities[model.currentCity].geoLong)
         updateCurrentWeather()
     }
     
